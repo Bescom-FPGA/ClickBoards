@@ -34,7 +34,7 @@ for patch_file in "${SCRIPT_DIR}/patches/"*.patch; do
         echo "Applied successfully."
     else
         echo "FAILED!"
-        echo "Error: Patch does not apply cleanly. You may need to integrate manually (See README.md Method A)."
+        echo "Error: Patch does not apply cleanly. You may need to integrate manually (See README.md Method B)."
         exit 1
     fi
 done

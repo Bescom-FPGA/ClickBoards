@@ -1,4 +1,4 @@
-# MikroE Click Boards for PolarFire SoC Icicle Kit
+# Click Boards for PolarFire SoC Icicle Kit
 
 This directory contains integration bundles for various **MikroE Click Boards** to be used with the **PolarFire SoC Icicle Kit** via its mikroBUS header.
 
@@ -8,7 +8,7 @@ Each bundle provides the necessary device tree overlays (`.dtso`), kernel config
 
 | Click Board | Sensor / IC | Interface | Directory |
 |-------------|-------------|-----------|-----------|
-| **Proximity 3 Click** | Vishay VCNL4200 | I2C | [`proximity-3-vcnl4200/`](proximity-3-vcnl4200/) |
+| **MIKROE Proximity 3 Click** | Vishay VCNL4200 | I2C | [`proximity-3-vcnl4200/`](proximity-3-vcnl4200/) |
 
 ## How to Use
 

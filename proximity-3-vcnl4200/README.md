@@ -40,9 +40,27 @@ Paths are the same whether your home is `~/PF_Linux` or elsewhere; only the pref
 All paths below assume your Yocto BSP layer is located at:  
 `BSP = yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp`
 
-You can integrate these files either manually (Method A) or via patches (Method B).
+**Recommended for most users:** **Method A** runs one script from this folder (after cloning the ClickBoards repo next to your Yocto tree). It applies patches, copies the overlay, and runs `bitbake` for you. Use **Method B** if you prefer step-by-step file edits, or **Method C** if you only want to apply patches without the script.
 
-### Method A: Manual Integration
+### Method A: Automated script (easiest)
+
+From a checkout that sits next to your Yocto workspace (e.g. `~/PF_Linux/ClickBoard/proximity-3-vcnl4200` with `~/PF_Linux/yocto-dev` present), run:
+
+```bash
+cd ~/PF_Linux/ClickBoard/proximity-3-vcnl4200
+./install_and_build.sh
+```
+
+The script will:
+
+1. Apply the patches (`.bbappend` and `boot.cmd` modifications).
+2. Copy `mpfs_icicle_vcnl4200.dtso` to the correct BSP directory.
+3. Source the Yocto environment (`source openembedded-core/oe-init-build-env build`).
+4. Run `bitbake -c cleansstate` for the modified recipes and build `mchp-base-image`.
+
+If you completed **Method A**, you can skip the **Building the Image** section below—it is already part of the script.
+
+### Method B: Manual integration
 
 1. **Copy the Device Tree Overlay:**
    ```bash
@@ -61,9 +79,11 @@ You can integrate these files either manually (Method A) or via patches (Method 
    - **`linux-mchp_6.%.bbappend`**: Append `file://vcnl4000.cfg \` to the `SRC_URI:append:mpfs-icicle-kit-all` block (see `snippets/linux-mchp_6-bbappend-SRC_URI.fragment`).
    - **`boot.cmd`**: Add `#conf-microchip,mpfs_icicle_vcnl4200.dtbo` to the end of the `bootm start` chain (see `snippets/boot.cmd.bootm-line.txt`).
 
-### Method B: Automated Patching
+Then follow **Building the Image** below.
 
-Run the following commands from the root of your project repository (e.g., `~/PF_Linux`), ensuring the `yocto-dev/` directory is present:
+### Method C: Patches only
+
+Run the following commands from the root of your project repository (e.g. `~/PF_Linux`), ensuring the `yocto-dev/` directory is present:
 
 ```bash
 patch -p1 < ClickBoard/proximity-3-vcnl4200/patches/0001-dt-overlay-mchp-add-vcnl4200-dtso.patch
@@ -73,29 +93,19 @@ patch -p1 < ClickBoard/proximity-3-vcnl4200/patches/0004-u-boot-bootcmd-merge-vc
 ```
 
 **Important:** The patches update the `.bbappend` files but do not create the `.dtso` file. You must manually copy it:
+
 ```bash
 cp ClickBoard/proximity-3-vcnl4200/overlay/mpfs_icicle_vcnl4200.dtso \
    yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-bsp/dt-overlay-mchp/files/
 ```
 
-*(Note: If a patch fails due to upstream changes or a different directory structure, fall back to Method A for that specific component.)*
+*(If a patch fails due to upstream changes or a different directory structure, complete that part using **Method B** instead.)*
 
-### Method C: Automated Script
-
-An installation script is provided to automatically apply patches, copy the overlay, and rebuild the image using `bitbake`.
-
-```bash
-cd ~/PF_Linux/ClickBoard/proximity-3-vcnl4200
-./install_and_build.sh
-```
-
-The script will:
-1. Apply the patches (`.bbappend` and `boot.cmd` modifications).
-2. Copy `mpfs_icicle_vcnl4200.dtso` to the correct BSP directory.
-3. Source the Yocto environment (`source openembedded-core/oe-init-build-env build`).
-4. Run `bitbake -c cleansstate` for the modified recipes and build `mchp-base-image`.
+Then follow **Building the Image** below.
 
 ## Building the Image
+
+Use this section after **Method B** or **Method C**. (**Method A** already runs these steps.)
 
 Rebuild the affected components and the final image:
 
