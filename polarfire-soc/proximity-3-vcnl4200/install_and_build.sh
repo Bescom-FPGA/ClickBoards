@@ -4,8 +4,8 @@ set -e
 
 # Get the absolute path to the directory containing this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# The root of the PF_Linux project (2 levels up from proximity-3-vcnl4200)
-PROJECT_ROOT="$(realpath "${SCRIPT_DIR}/../..")"
+# The root of the PF_Linux project (ClickBoard/polarfire-soc/<bundle> → 3 levels up)
+PROJECT_ROOT="$(realpath "${SCRIPT_DIR}/../../..")"
 YOCTO_DIR="${PROJECT_ROOT}/yocto-dev"
 BSP_DIR="${YOCTO_DIR}/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp"
 

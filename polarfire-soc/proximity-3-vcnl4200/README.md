@@ -44,10 +44,10 @@ All paths below assume your Yocto BSP layer is located at:
 
 ### Method A: Automated script (easiest)
 
-From a checkout that sits next to your Yocto workspace (e.g. `~/PF_Linux/ClickBoard/proximity-3-vcnl4200` with `~/PF_Linux/yocto-dev` present), run:
+From a checkout that sits next to your Yocto workspace (e.g. `~/PF_Linux/ClickBoard/polarfire-soc/proximity-3-vcnl4200` with `~/PF_Linux/yocto-dev` present), run:
 
 ```bash
-cd ~/PF_Linux/ClickBoard/proximity-3-vcnl4200
+cd ~/PF_Linux/ClickBoard/polarfire-soc/proximity-3-vcnl4200
 ./install_and_build.sh
 ```
 
@@ -64,13 +64,13 @@ If you completed **Method A**, you can skip the **Building the Image** section b
 
 1. **Copy the Device Tree Overlay:**
    ```bash
-   cp ClickBoard/proximity-3-vcnl4200/overlay/mpfs_icicle_vcnl4200.dtso \
+   cp ClickBoard/polarfire-soc/proximity-3-vcnl4200/overlay/mpfs_icicle_vcnl4200.dtso \
       "${BSP}/recipes-bsp/dt-overlay-mchp/files/"
    ```
 
 2. **Copy the Kernel Fragment:**
    ```bash
-   cp ClickBoard/proximity-3-vcnl4200/kernel/vcnl4000.cfg \
+   cp ClickBoard/polarfire-soc/proximity-3-vcnl4200/kernel/vcnl4000.cfg \
       "${BSP}/recipes-kernel/linux/files/mpfs-icicle-kit-all/"
    ```
 
@@ -86,16 +86,16 @@ Then follow **Building the Image** below.
 Run the following commands from the root of your project repository (e.g. `~/PF_Linux`), ensuring the `yocto-dev/` directory is present:
 
 ```bash
-patch -p1 < ClickBoard/proximity-3-vcnl4200/patches/0001-dt-overlay-mchp-add-vcnl4200-dtso.patch
-patch -p1 < ClickBoard/proximity-3-vcnl4200/patches/0002-add-kernel-fragment-vcnl4000.cfg.patch
-patch -p1 < ClickBoard/proximity-3-vcnl4200/patches/0003-linux-mchp-bbappend-add-vcnl4000-cfg.patch
-patch -p1 < ClickBoard/proximity-3-vcnl4200/patches/0004-u-boot-bootcmd-merge-vcnl4200-overlay.patch
+patch -p1 < ClickBoard/polarfire-soc/proximity-3-vcnl4200/patches/0001-dt-overlay-mchp-add-vcnl4200-dtso.patch
+patch -p1 < ClickBoard/polarfire-soc/proximity-3-vcnl4200/patches/0002-add-kernel-fragment-vcnl4000.cfg.patch
+patch -p1 < ClickBoard/polarfire-soc/proximity-3-vcnl4200/patches/0003-linux-mchp-bbappend-add-vcnl4000-cfg.patch
+patch -p1 < ClickBoard/polarfire-soc/proximity-3-vcnl4200/patches/0004-u-boot-bootcmd-merge-vcnl4200-overlay.patch
 ```
 
 **Important:** The patches update the `.bbappend` files but do not create the `.dtso` file. You must manually copy it:
 
 ```bash
-cp ClickBoard/proximity-3-vcnl4200/overlay/mpfs_icicle_vcnl4200.dtso \
+cp ClickBoard/polarfire-soc/proximity-3-vcnl4200/overlay/mpfs_icicle_vcnl4200.dtso \
    yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-bsp/dt-overlay-mchp/files/
 ```
 
