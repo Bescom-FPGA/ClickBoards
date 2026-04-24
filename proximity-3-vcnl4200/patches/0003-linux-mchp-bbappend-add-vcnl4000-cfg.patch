@@ -1,0 +1,10 @@
+--- a/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/linux-mchp_6.%.bbappend
++++ b/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/linux-mchp_6.%.bbappend
+@@ -13,6 +13,7 @@ SRC_URI:append:mpfs-icicle-kit-all = " \
+     file://qspi_flash.cfg \
+     file://rpi_sense_hat.cfg \
+     file://mcp23s08_spi.cfg \
++    file://vcnl4000.cfg \
+ "
+ 
+ SRC_URI:append:mpfs-video-kit = " \

@@ -1,0 +1,2 @@
+# linux-mchp_6.%.bbappend 의 SRC_URI:append:mpfs-icicle-kit-all 블록에 한 줄 추가:
+    file://vcnl4000.cfg \

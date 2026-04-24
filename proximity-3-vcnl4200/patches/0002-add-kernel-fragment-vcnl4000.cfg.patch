@@ -1,0 +1,5 @@
+--- /dev/null
++++ b/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/files/mpfs-icicle-kit-all/vcnl4000.cfg
+@@ -0,0 +1,2 @@
++CONFIG_VCNL4000=m
++

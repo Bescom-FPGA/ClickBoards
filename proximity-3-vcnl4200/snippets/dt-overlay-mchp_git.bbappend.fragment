@@ -1,0 +1,2 @@
+# dt-overlay-mchp_git.bbappend 상단(FILESEXTRAPATHS 다음)에 추가:
+SRC_URI:append:mpfs-icicle-kit-all = " file://mpfs_icicle_vcnl4200.dtso;subdir=git/mpfs_icicle"

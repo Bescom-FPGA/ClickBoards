@@ -1,0 +1,11 @@
+--- a/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-bsp/u-boot/files/mpfs-icicle-kit/boot.cmd
++++ b/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-bsp/u-boot/files/mpfs-icicle-kit/boot.cmd
+@@ -5,7 +5,7 @@ fdt addr ${fdtcontroladdr}
+ fdt get value board_compatible / compatible 1
+ setenv fitconf conf-${board_compatible}.dtb
+ load mmc 0:${distro_bootpart} ${scriptaddr} fitImage
+-bootm start ${scriptaddr}#${fitconf}#conf-microchip,mpfs_icicle_cpu_opp.dtbo
++bootm start ${scriptaddr}#${fitconf}#conf-microchip,mpfs_icicle_cpu_opp.dtbo#conf-microchip,mpfs_icicle_vcnl4200.dtbo
+ bootm loados ${scriptaddr};
+ # Try to load a ramdisk if available inside fitImage
+ bootm ramdisk;

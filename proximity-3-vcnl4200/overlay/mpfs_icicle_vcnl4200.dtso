@@ -1,0 +1,18 @@
+/dts-v1/;
+/plugin/;
+
+/*
+ * MikroE Proximity 3 Click (MIKROE-2801), Vishay VCNL4200.
+ * Libero에서 mikroBUS SCL/SDA가 MSS i2c_0_* (f2m/m2f)에 연결된 경우:
+ * DTS의 &i2c0 (soc i2c@2010a000). Linux에서는 보통 /dev/i2c-0 —
+ * sysfs로 of_node basename 확인 권장.
+ * (레퍼런스가 fabric CoreI2C &i2c2를 쓰는 설계라면 그쪽으로 바꿀 것.)
+ */
+&i2c0 {
+	status = "okay";
+
+	proximity@51 {
+		compatible = "vishay,vcnl4200";
+		reg = <0x51>;
+	};
+};

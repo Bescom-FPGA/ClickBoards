@@ -1,0 +1,11 @@
+--- a/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-bsp/dt-overlay-mchp/dt-overlay-mchp_git.bbappend
++++ b/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-bsp/dt-overlay-mchp/dt-overlay-mchp_git.bbappend
+@@ -1,5 +1,8 @@
+ inherit devicetree
+ 
++FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
++SRC_URI:append:mpfs-icicle-kit-all = " file://mpfs_icicle_vcnl4200.dtso;subdir=git/mpfs_icicle"
++
+ S = "${WORKDIR}/git"
+ 
+ COMPATIBLE_MACHINE:append:mpfs-video-kit = "|mpfs-video-kit"

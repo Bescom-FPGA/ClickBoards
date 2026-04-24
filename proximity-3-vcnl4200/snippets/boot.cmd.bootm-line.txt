@@ -1,0 +1,2 @@
+# boot.cmd 의 bootm start 한 줄을 아래로 교체 (또는 #conf-microchip,mpfs_icicle_vcnl4200.dtbo 만 체인 끝에 추가):
+bootm start ${scriptaddr}#${fitconf}#conf-microchip,mpfs_icicle_cpu_opp.dtbo#conf-microchip,mpfs_icicle_vcnl4200.dtbo
