@@ -14,25 +14,46 @@ Folders follow the same split as [linux4microchip/meta-mchp](https://github.com/
 | [`pic64/`](pic64/) | PIC64 MPU family bundles (reserved for future use). |
 | [`mpu/`](mpu/) | SAM and other MPU bundles (reserved for future use). |
 
-## Supported Click boards
+## Supported bundles
+
+### Click boards
 
 | Click board | Sensor / IC | Interface | Bundle path |
 |-------------|-------------|-----------|-------------|
 | **MIKROE Proximity 3 Click** | Vishay VCNL4200 | I2C | [`polarfire-soc/proximity-3-vcnl4200/`](polarfire-soc/proximity-3-vcnl4200/) |
+| **MikroE Thumbstick Click** (COM-09032 / MIKROE-1627) | MCP3204 ADC | SPI1 + Fabric GPIO (INT / button) | [`polarfire-soc/THUMBSTICK_COM_09032/`](polarfire-soc/THUMBSTICK_COM_09032/) |
+
+### Shared FPGA / overlay (no Click SKU)
+
+| Purpose | Contents | Bundle path |
+|---------|----------|-------------|
+| **Fabric CoreGPIO (`fabric_gpio`)** — used by Thumbstick (and OLED / similar overlays that reference `&fabric_gpio`) | DT overlay `mpfs_icicle_fabric_gpio.dtso`, optional Libero **`MPFS_ICICLE_KIT_BASE_DESIGN_THUMBSTICK_CLICK.job`** | [`polarfire-soc/FABRIC_GPIO_COMMON/`](polarfire-soc/FABRIC_GPIO_COMMON/) |
+
+Thumbstick integration **chains** `mpfs_icicle_fabric_gpio.dtbo` **before** the board overlay in U-Boot FIT; copy **`FABRIC_GPIO_COMMON`** overlay sources when building Thumbstick (see that bundle’s `README.md`).
 
 ## How to use
 
 Open the bundle directory and follow its `README.md`.
 
-Example (Proximity 3 on Icicle):
+Examples:
 
 ```bash
 cd polarfire-soc/proximity-3-vcnl4200
 cat README.md
 ```
 
+```bash
+cd polarfire-soc/FABRIC_GPIO_COMMON
+cat README.md
+```
+
+```bash
+cd polarfire-soc/THUMBSTICK_COM_09032
+cat README.md
+```
+
 ## General prerequisites
 
 - A Yocto build that includes **Microchip `meta-mchp`**.
-- For the Proximity 3 bundle: **`mpfs-icicle-kit-*`** machine and the paths described in that bundle’s `README.md`.
-- **Hardware:** mikroBUS wired as assumed in the bundle (I2C bus, address, Libero / MSS vs fabric). See each bundle’s `README.md`.
+- **`mpfs-icicle-kit-*`** machine and BSP paths given in each bundle’s `README.md`.
+- **Hardware:** mikroBUS / SPI / I2C / GPIO routing must match the bundle (MSS vs Fabric CoreGPIO, Libero `.pdc`, optional FPGA programming job). See each bundle’s `README.md`.

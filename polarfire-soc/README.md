@@ -6,9 +6,18 @@ Each subfolder is one **bundle**: overlays, kernel fragments, patches, and optio
 
 ## Bundles
 
+### Shared overlay / FPGA artifact
+
+| Bundle | Role |
+|--------|------|
+| [`FABRIC_GPIO_COMMON/`](FABRIC_GPIO_COMMON/) | Adds **`fabric_gpio`** (`microchip,coregpio-rtl-v3`) for mikroBUS lines tied to Fabric CoreGPIO. Includes optional **`MPFS_ICICLE_KIT_BASE_DESIGN_THUMBSTICK_CLICK.job`** (Libero FlashPro job: **mBUS_PWM**, **mBUS_INT** routed into that CoreGPIO, aligned with `mpfs_icicle_fabric_gpio.dtso`). Load this FIT overlay **before** board-specific `dtbo` where documented. |
+
+### Click boards
+
 | Bundle | Click board | Notes |
 |--------|-------------|--------|
-| [`proximity-3-vcnl4200/`](proximity-3-vcnl4200/) | MIKROE Proximity 3 (Vishay VCNL4200) | Icicle mikroBUS, I2C; see bundle `README.md` for machine and Libero assumptions. |
+| [`proximity-3-vcnl4200/`](proximity-3-vcnl4200/) | MIKROE Proximity 3 (Vishay VCNL4200) | Icicle mikroBUS, I2C; see bundle `README.md`. |
+| [`THUMBSTICK_COM_09032/`](THUMBSTICK_COM_09032/) | MikroE Thumbstick (COM-09032 / MCP3204) | SPI1 + **`&fabric_gpio`** for pushbutton; expects **`FABRIC_GPIO_COMMON`** overlay copied into the same Yocto build; see bundle `README.md`. |
 
 ## Parent repository
 
