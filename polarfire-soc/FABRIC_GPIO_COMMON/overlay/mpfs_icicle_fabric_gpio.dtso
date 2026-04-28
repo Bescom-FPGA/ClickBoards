@@ -1,0 +1,28 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/microchip,mpfs-clock.h>
+
+/*
+ * Common Fabric CoreGPIO overlay for Icicle Kit mikroBUS custom routing.
+ *
+ * IMPORTANT:
+ * 1) Set reg=<...> to the APB base address assigned to CoreGPIO in Libero/FIC3.
+ * 2) Set ngpios to match your configured GPIO width.
+ * 3) Keep label "fabric_gpio:" because board overlays reference &fabric_gpio.
+ * 4) clocks: gpio-mpfs.c always calls devm_clk_get_enabled(); without this,
+ *    probe fails and gpio-keys sees "failed to get gpio". Same FIC3 clock as
+ *    core_pwm@40000000 / corei2c@40000200 in mpfs-icicle-kit-fabric.dtsi.
+ */
+
+&{/} {
+	fabric_gpio: gpio@40000100 {
+		compatible = "microchip,coregpio-rtl-v3";
+		reg = <0x0 0x40000100 0x0 0x1000>; /* FIC_3_0x4000_01xx */
+		clocks = <&ccc_nw CLK_CCC_PLL0_OUT3>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		ngpios = <6>; /* 5 output, 1 input */
+		status = "okay";
+	};
+};

@@ -1,0 +1,9 @@
+--- a/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/linux-mchp_6.%.bbappend
++++ b/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/linux-mchp_6.%.bbappend
+@@ -14,5 +14,6 @@ SRC_URI:append:mpfs-icicle-kit-all = " \
+     file://qspi_flash.cfg \
+     file://rpi_sense_hat.cfg \
+-    file://mcp23s08_spi.cfg \
++    file://mcp23s08_spi.cfg \
++    file://mcp320x.cfg \
+ "

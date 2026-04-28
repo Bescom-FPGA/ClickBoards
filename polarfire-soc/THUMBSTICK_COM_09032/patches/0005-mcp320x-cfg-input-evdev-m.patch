@@ -1,0 +1,8 @@
+--- a/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/files/mpfs-icicle-kit-all/mcp320x.cfg
++++ b/yocto-dev/meta-mchp/meta-mchp-polarfire-soc/meta-mchp-polarfire-soc-bsp/recipes-kernel/linux/files/mpfs-icicle-kit-all/mcp320x.cfg
+@@ -1,4 +1,5 @@
+ CONFIG_MCP320X=m
+ CONFIG_KEYBOARD_GPIO=y
+ CONFIG_INPUT_KEYBOARD=y
+ CONFIG_KEYBOARD_GPIO_POLLED=y
++CONFIG_INPUT_EVDEV=m

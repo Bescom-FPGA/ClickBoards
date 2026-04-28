@@ -1,0 +1,54 @@
+/dts-v1/;
+/plugin/;
+
+/*
+ * MikroE Thumbstick Click (MIKROE-1627)
+ * Uses Microchip MCP3204 12-bit ADC on SPI.
+ * 
+ * - SPI: Routed to MSS SPI1 (&spi1).
+ * - Pushbutton (INT): Routed to mikroBUS INT pin.
+ *
+ * [!] IMPORTANT: 
+ * 1. The MCP3204 requires a vref-supply. We define a fixed 3.3V regulator below.
+ * 2. mBUS_INT was remapped to a Fabric CoreGPIO input in Libero.
+ *    This overlay expects a gpio-controller label named "&fabric_gpio" to exist
+ *    in the base DTS (or another always-loaded overlay).
+ *    The bit index below (5) is an example; adjust to your CoreGPIO mapping.
+ */
+
+&{/} {
+	vref_3v3: regulator-vref-3v3 {
+		compatible = "regulator-fixed";
+		regulator-name = "vref_3v3";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+	};
+
+	/*
+	 * Fabric CoreGPIO has no interrupts wired to PLIC in this overlay, so
+	 * interrupt-based gpio-keys cannot get gpiod_to_irq(). Use polled keys.
+	 */
+	thumbstick-keys {
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+
+		button-thumbstick {
+			label = "Thumbstick Button";
+			linux,code = <0x13d>; /* BTN_THUMB */
+			gpios = <&fabric_gpio 5 1>; /* GPIO_OUT[5] for mBUS_INT_GPIO (Active Low) */
+		};
+	};
+};
+
+&spi1 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	adc@0 {
+		compatible = "microchip,mcp3204";
+		reg = <0>; /* Chip Select 0 */
+		spi-max-frequency = <1000000>; /* 1 MHz max for MCP3204 */
+		vref-supply = <&vref_3v3>;
+	};
+};

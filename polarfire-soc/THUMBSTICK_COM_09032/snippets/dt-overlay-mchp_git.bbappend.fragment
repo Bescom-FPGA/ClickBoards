@@ -1,0 +1,6 @@
+# dt-overlay: FABRIC 먼저 켠 뒤(= mpfs_icicle_fabric_gpio.dtso 가 SRC_URI에 있을 때)
+# 이 줄만 바꾸면 됨(패치 0001과 동일):
+SRC_URI:append:mpfs-icicle-kit-all = " file://mpfs_icicle_fabric_gpio.dtso;subdir=git/mpfs_icicle file://mpfs_icicle_thumbstick.dtso;subdir=git/mpfs_icicle"
+#
+# 참고: ClickBoard 쪽 `proximity-3-vcnl4200/snippets/dt-overlay-mchp_git.bbappend.fragment` 는
+# I2C 단독용이라 **fabric .dtso 없이** vcnl 만 추가한다(난이도/전제가 다름).

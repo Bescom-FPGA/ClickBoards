@@ -1,0 +1,6 @@
+# U-Boot boot.cmd 끝의 FIT 체인( FABRIC + 썸스틱 ). install_and_build.sh 가 자동 append 함.
+# 수동 머지할 때: bootm start ... 한 줄에 아래 두 fragment 가 순서대로 있어야 함(보통 OPP 다음).
+#conf-microchip,mpfs_icicle_cpu_opp.dtbo#conf-microchip,mpfs_icicle_fabric_gpio.dtbo#conf-microchip,mpfs_icicle_thumbstick.dtbo
+#
+# ClickBoard/VCNL 참고: ../ClickBoard/polarfire-soc/proximity-3-vcnl4200/snippets/boot.cmd.bootm-line.txt
+#   → cpu_opp + vcnl 만 있음( fabric / thumb 없음)

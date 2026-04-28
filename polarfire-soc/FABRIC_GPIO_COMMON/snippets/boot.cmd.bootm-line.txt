@@ -1,0 +1,1 @@
+#conf-microchip,mpfs_icicle_fabric_gpio.dtbo

@@ -1,0 +1,2 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI:append:mpfs-icicle-kit-all = " file://mpfs_icicle_fabric_gpio.dtso;subdir=git/mpfs_icicle"
